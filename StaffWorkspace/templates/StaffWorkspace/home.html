@@ -1,0 +1,36 @@
+{% extends "StaffWorkspace/base.html" %}
+{% load static %}
+
+{% block extraCSS %}
+    <link rel="stylesheet" href="{% static 'StaffWorkspace/css/home.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="logout">
+            <a href="{% url 'logout_user' %}">
+                <button type="button" class="btn btn-default">Logout</button>
+            </a>
+        </div>
+        <div class="logout">
+            <a href="{% url 'report' None %}"><button type="button" class="btn btn-default">Report</button></a>
+        </div>        
+        <div class="logout">
+            <a href="/admin/">
+                <button type="button" class="btn btn-default">Add</button>
+            </a>
+        </div>
+        <div class="contents">
+            {% for catagory in catagories %}
+                <a href="{% url 'input_form' catagory.name %}">
+                    <div class="option" style="border: 5px solid {{ catagory.color }};">
+                        <div class="optionImage" style="background-color: {{ catagory.color }};">
+                            <img src="/media/{{ catagory.image }}" alt="{{ catagory.name }}">
+                        </div>
+                        <p class="optionText">{{ catagory.name|upper }}</p>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
